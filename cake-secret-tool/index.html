@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#fff7f1" />
+<title>给你一块｜蛋糕创作小工具</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="logo">🍰</div><div><h1>给你一块</h1><p>把想说的话，做成蛋糕</p></div></div>
+    <button class="ghost" id="resetBtn">重做</button>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow">CAKE NOTE</div>
+    <h2>今天想把什么，做成一块蛋糕？</h2>
+    <p class="sub">不用会烘焙。挤奶油、丢水果、写一句话，再藏一个只有对方切开才看到的秘密。</p>
+    <div class="preset-row" id="presetRow">
+      <button class="chip active" data-preset="birthday">🎂 生日</button>
+      <button class="chip" data-preset="cheer">🌟 夸夸</button>
+      <button class="chip" data-preset="luck">🧧 好运</button>
+      <button class="chip" data-preset="crazy">💥 发疯</button>
+      <button class="chip" data-preset="self">🫶 给自己</button>
+      <button class="chip" data-preset="nothing">☁️ 没理由</button>
+    </div>
+  </section>
+
+  <section class="stage-card">
+    <div class="stage-head"><span class="stage-title">01 · 做你的蛋糕</span><span class="hint" id="modeHint">按住拖动，挤奶油</span></div>
+    <div class="canvas-wrap"><canvas id="cakeCanvas" width="720" height="720"></canvas></div>
+    <div class="tools">
+      <button class="tool active" data-mode="cream"><span>〰️</span><small>挤奶油</small></button>
+      <button class="tool" data-mode="topping"><span>🍓</span><small>放配料</small></button>
+      <button class="tool" id="undoBtn"><span>↶</span><small>撤销</small></button>
+      <button class="tool" id="crazyBtn"><span>💥</span><small>发疯一下</small></button>
+      <button class="tool" id="cleanBtn"><span>🫧</span><small>清空装饰</small></button>
+    </div>
+    <div class="mini-status" id="statusText">奶油模式：在蛋糕上按住并拖动</div>
+  </section>
+
+  <section class="panel">
+    <h3>蛋糕胚 · 不只圆形</h3>
+    <div class="shape-list" id="shapeList">
+      <button class="shape active" data-shape="round">圆圆</button>
+      <button class="shape" data-shape="heart">爱心</button>
+      <button class="shape" data-shape="cloud">云朵</button>
+      <button class="shape" data-shape="star">星星</button>
+      <button class="shape" data-shape="square">方块</button>
+    </div>
+
+    <div class="field">
+      <label>奶油颜色 <span>选一个，然后直接画</span></label>
+      <div class="color-list" id="colorList">
+        <button class="swatch active" data-color="#fff7ef" style="background:#fff7ef" aria-label="香草"></button>
+        <button class="swatch" data-color="#ff9db2" style="background:#ff9db2" aria-label="草莓"></button>
+        <button class="swatch" data-color="#ffd166" style="background:#ffd166" aria-label="芒果"></button>
+        <button class="swatch" data-color="#b8e0c8" style="background:#b8e0c8" aria-label="开心果"></button>
+        <button class="swatch" data-color="#bca7e8" style="background:#bca7e8" aria-label="芋泥"></button>
+        <button class="swatch" data-color="#704c3d" style="background:#704c3d" aria-label="巧克力"></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>奇怪但好玩的配料 <span>选中后点蛋糕摆放</span></label>
+      <div class="topping-list" id="toppingList">
+        <button class="topper active" data-top="🍓">🍓</button>
+        <button class="topper" data-top="🍒">🍒</button>
+        <button class="topper" data-top="🫐">🫐</button>
+        <button class="topper" data-top="🎀">🎀</button>
+        <button class="topper" data-top="🍀">🍀</button>
+        <button class="topper" data-top="💰">💰</button>
+        <button class="topper" data-top="☕">☕</button>
+        <button class="topper" data-top="💻">💻</button>
+        <button class="topper" data-top="🐱">🐱</button>
+        <button class="topper" data-top="🔥">🔥</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="surfaceText">蛋糕上写什么 <span id="suggestText">例如：恭喜又活一年</span></label>
+      <input id="surfaceText" type="text" maxlength="18" value="恭喜又活一年" placeholder="写一句够有梗的话" />
+    </div>
+  </section>
+
+  <section class="secret-box">
+    <h3>02 · 藏一句只有切开才看得到的话 🔒</h3>
+    <p>分享出去时先不展示。对方点击「切开看看」，蛋糕才会裂开并出现这句话。</p>
+    <textarea id="secretText" maxlength="80" placeholder="例如：其实我最想说的是，谢谢你一直陪着我。">其实我最想说的是，谢谢你一直陪着我。</textarea>
+  </section>
+
+  <div class="action-row">
+    <button class="btn secondary" id="randomBtn">🎲 随机灵感</button>
+    <button class="btn primary" id="previewBtn">切开预览 →</button>
+  </div>
+  <div class="footer-note">第一版原型 · 所有编辑都只保存在当前页面</div>
+</div>
+
+<div class="reveal" id="revealPage">
+  <div class="reveal-inner">
+    <div class="reveal-kicker">A CAKE FOR YOU</div>
+    <h2>有人给你做了一块蛋糕</h2>
+    <p id="revealSurface">“恭喜又活一年”</p>
+    <div class="cake-reveal-stage" id="revealStage">
+      <div class="cake-piece left" id="leftPiece"></div>
+      <div class="cake-piece right" id="rightPiece"></div>
+      <div class="knife"></div>
+      <div class="secret-reveal"><div class="lock">💌</div><h3>藏在蛋糕里的话</h3><p class="secret-text" id="secretRevealText"></p></div>
+    </div>
+    <button class="btn accent" id="cutBtn" style="width:100%;margin-bottom:10px">🔪 切开看看</button>
+    <div class="reveal-actions">
+      <button class="btn secondary" id="backBtn">← 回去修改</button>
+      <button class="btn primary" id="shareBtn">分享给 TA</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">已复制</div>
+
+<script src="app.js"></script>
+</body>
+</html>
