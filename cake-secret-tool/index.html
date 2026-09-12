@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#f7f3eb">
   <meta name="description" content="亲手做一块蛋糕，把话藏进去。切开后，送给你。">
   <title>给你一块 · 手作蛋糕工坊</title>
@@ -29,8 +29,8 @@
   </main>
   <footer class="page-footer"><span>不必是生日，也值得一块蛋糕。</span><span>给你一块 / 手作工坊</span></footer>
   <dialog id="previewDialog" aria-label="蛋糕揭晓预览">
-    <div class="preview-layout"><div class="film-wrap"><canvas id="filmCanvas" width="720" height="1280" aria-label="完整蛋糕、切开动画及隐藏留言预览"></canvas><video id="resultVideo" controls playsinline hidden aria-label="已生成的视频"></video></div>
-      <div class="preview-controls"><button id="closePreview" class="text-btn close-preview">← 回去修改</button><p class="eyebrow">A LITTLE SURPRISE</p><h2>切开，才知道。</h2><p class="preview-description">完整的蛋糕、切开的瞬间，<br>还有只想对 TA 说的话。</p><button id="cutBtn" class="primary">切开看看 <span>↗</span></button><button id="exportBtn" class="secondary">导出小视频 ↓</button><div id="exportProgress" hidden><progress max="100" value="0"></progress><p id="progressLabel" role="status">正在制作视频…</p><button id="cancelExport" class="text-btn">取消生成</button></div><div id="downloadActions" hidden><a id="downloadLink" class="primary" download>保存视频 ↓</a><button id="shareBtn" class="secondary">发给朋友 ↗</button></div><p id="exportNote" class="fine-print">竖屏短片 · 完整蛋糕 → 切开 → 留言<br>视频只包含作品，不包含操作界面。</p></div></div>
+    <div class="preview-layout"><div class="film-wrap"><canvas id="filmCanvas" width="720" height="1280" aria-label="完整蛋糕、切开动画及隐藏留言预览"></canvas></div>
+      <div class="preview-controls"><button id="closePreview" class="text-btn close-preview">← 回去修改</button><p class="eyebrow">A LITTLE SURPRISE</p><h2>切开，才知道。</h2><p class="preview-description">完整的蛋糕、切开的瞬间，<br>还有只想对 TA 说的话。</p><button id="cutBtn" class="primary">切开看看 <span>↗</span></button><button id="exportBtn" class="secondary">导出小视频 ↓</button><div id="exportProgress" hidden><progress max="100" value="0"></progress><p id="progressLabel" role="status">正在制作视频…</p><button id="cancelExport" class="text-btn">取消生成</button></div><div id="shareActions" hidden><button id="publishBtn" class="primary">发布视频笔记 ↗</button><button id="saveImageBtn" class="secondary">保存完整蛋糕图</button></div><p id="exportNote" class="fine-print">竖屏短片 · 完整蛋糕 → 切开 → 留言<br>视频只包含作品，不包含操作界面。</p></div></div>
   </dialog>
   <dialog id="resetDialog" class="reset-dialog"><h2>重新做一块？</h2><p>会清空这块蛋糕和留言。</p><div><button id="cancelReset" class="secondary">继续做这块</button><button id="confirmReset" class="primary">重新开始</button></div></dialog>
   <div id="toast" role="status" aria-live="polite"></div>

@@ -11,7 +11,7 @@
   const steps = ['蛋糕胚','奶油','装饰','藏句话','送给你'];
   const blank = () => ({version:2,shape:'round',flavor:'vanilla',coat:null,strokes:[],toppings:[],message:'',recipient:'',sender:'',step:0});
   let state = blank(), history=[], future=[], tool='pipe', cream=COLORS[0][1], topping='strawberry', size=29;
-  let drawing=null, lastPoint=null, toastTimer, animation=0, exporting=false, cancelRequested=false, recording=null, exportFile=null, exportURL=null;
+  let drawing=null, lastPoint=null, toastTimer, animation=0, exporting=false, cancelRequested=false, recording=null, exportBlob=null;
   let saved=false, saveTimer, textSnapshot=null;
   try {const raw=JSON.parse(localStorage.getItem(KEY));if(validDraft(raw)){state=raw;saved=true;}} catch (_) {}
   function validDraft(s){return s?.version===2 && s.shape in SHAPES && s.flavor in FLAVORS && Array.isArray(s.strokes) && s.strokes.length<=500 && s.strokes.every(v=>Array.isArray(v.points)&&v.points.length<=6000&&v.points.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y))) && Array.isArray(s.toppings) && s.toppings.length<=400 && s.toppings.every(t=>t.kind in TOPPINGS&&Number.isFinite(t.x)&&Number.isFinite(t.y)) && typeof s.message==='string' && s.message.length<=160 && typeof s.sender==='string' && typeof s.recipient==='string' && Number.isInteger(s.step)&&s.step>=0&&s.step<=4;}
@@ -118,15 +118,15 @@
     c.fillStyle='#a49480';c.font='14px "Songti SC","Noto Serif CJK SC",serif';c.fillText('不必是生日，也值得被惦记。',360,1188);
   }
   function stopAnimation(){cancelAnimationFrame(animation);animation=0;}
-  function play(){if(exporting)return;stopAnimation();$('resultVideo').pause();$('resultVideo').hidden=true;film.hidden=false;const start=performance.now();$('cutBtn').textContent='重新看一遍 ↻';const loop=now=>{const t=(now-start)/1000;drawFilm(t);if(t<duration())animation=requestAnimationFrame(loop);};animation=requestAnimationFrame(loop);}
-  function clearExport(){if(exportURL)URL.revokeObjectURL(exportURL);exportURL=null;exportFile=null;$('resultVideo').pause();$('resultVideo').removeAttribute('src');$('resultVideo').load();$('resultVideo').hidden=true;film.hidden=false;$('downloadActions').hidden=true;}
+  function play(){if(exporting)return;stopAnimation();film.hidden=false;film.hidden=false;const start=performance.now();$('cutBtn').textContent='重新看一遍 ↻';const loop=now=>{const t=(now-start)/1000;drawFilm(t);if(t<duration())animation=requestAnimationFrame(loop);};animation=requestAnimationFrame(loop);}
+  function clearExport(){exportBlob=null;$('shareActions').hidden=true;film.hidden=false;}
   function openPreview(){endDraw();flushText();if(!state.message.trim()){setStep(3);toast('先藏一句话，再送给 TA 吧');$('message').focus();return;}stopAnimation();clearExport();drawFilm(0);$('cutBtn').textContent='切开看看 ↗';$('previewDialog').showModal();document.body.style.overflow='hidden';}
   $('cutBtn').onclick=play;
   $('closePreview').onclick=()=>{if(exporting)return;stopAnimation();$('previewDialog').close();};
   $('previewDialog').addEventListener('cancel',e=>{if(exporting)e.preventDefault();});
-  $('previewDialog').addEventListener('close',()=>{stopAnimation();$('resultVideo').pause();document.body.style.overflow='';});
-  function download(blob,name){const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}
-  function saveImage(){const out=document.createElement('canvas');out.width=1080;out.height=1080;const c=out.getContext('2d');c.scale(1.5,1.5);c.fillStyle='#f7f3eb';c.fillRect(0,0,720,720);cakeScene(c);out.toBlob(b=>{if(b)download(b,'给你一块-完整蛋糕.png');},'image/png');}
+  $('previewDialog').addEventListener('close',()=>{stopAnimation();document.body.style.overflow='';});
+  
+  function saveImage(){const out=document.createElement('canvas');out.width=1080;out.height=1080;const c=out.getContext('2d');c.scale(1.5,1.5);c.fillStyle='#f7f3eb';c.fillRect(0,0,720,720);cakeScene(c);const data=out.toDataURL('image/png');const bridge=window.xhs&&window.xhs.miniTool;if(bridge&&bridge.writeTempFile&&bridge.saveImageToPhotosAlbum){bridge.writeTempFile({data:data}).then(r=>bridge.saveImageToPhotosAlbum({filePath:r.filePath})).then(()=>toast('完整蛋糕图已保存到相册')).catch(()=>toast('保存失败，请截图保存完整蛋糕图'));}else toast('当前浏览器没有相册接口，请截图保存完整蛋糕图');}
   function recorderFormat(){if(!window.MediaRecorder||!film.captureStream)return null;for(const mime of ['video/mp4;codecs=avc1.42001f','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm']){if(MediaRecorder.isTypeSupported(mime))return mime;}return null;}
   function exportUI(busy){exporting=busy;for(const id of ['closePreview','cutBtn','exportBtn'])$(id).disabled=busy;$('exportProgress').hidden=!busy;}
   $('cancelExport').onclick=()=>{cancelRequested=true;if(recording?.state==='recording')recording.stop();};
@@ -145,14 +145,15 @@
       watchdog=setTimeout(()=>{cancelRequested=true;if(recording?.state==='recording')recording.stop();},(length+12)*1000);
       await done;stopAnimation();if(cancelRequested){drawFilm(0);return;}
       const type=recording.mimeType.split(';')[0],ext=type.includes('mp4')?'mp4':'webm';const blob=new Blob(chunks,{type});if(blob.size<1000)throw new Error('视频没有成功生成');
-      exportFile=new File([blob],`给你一块-藏在蛋糕里的话.${ext}`,{type});exportURL=URL.createObjectURL(exportFile);
-      $('downloadLink').href=exportURL;$('downloadLink').download=exportFile.name;$('downloadLink').textContent=`保存视频 · ${ext.toUpperCase()} ↓`;$('downloadActions').hidden=false;
-      $('resultVideo').src=exportURL;$('resultVideo').hidden=false;film.hidden=true;
-      $('exportNote').textContent=`${Math.round(length)} 秒 · 720 × 1280 · ${ext.toUpperCase()} · ${(blob.size/1048576).toFixed(1)} MB。`+(ext==='webm'?'此浏览器生成 WebM；如需 MP4，请用支持 MP4 录制的浏览器打开。':'保存视频后就能发给朋友。');
+      exportBlob=blob;
+      $('shareActions').hidden=false;
+      film.hidden=false;
+      $('exportNote').textContent=`${Math.round(length)} 秒 · 720 × 1280 · ${ext.toUpperCase()} · ${(blob.size/1048576).toFixed(1)} MB。视频已在内存生成，可在小红书容器中发布。`;
       toast('小视频做好了，可以保存或发给朋友');
     }catch(e){toast('视频生成失败，请重试或换浏览器打开');console.error('Video export:',e);}finally{clearTimeout(watchdog);stopAnimation();stream?.getTracks().forEach(t=>t.stop());recording=null;exportUI(false);}
   };
-  $('shareBtn').onclick=async()=>{if(!exportFile)return;if(navigator.canShare?.({files:[exportFile]})&&navigator.share){try{await navigator.share({files:[exportFile],title:'给你一块',text:'亲手做了一块蛋糕，里面还有一句话给你。'});}catch(e){if(e.name!=='AbortError')toast('暂时无法直接分享，请先保存视频再发送');}}else{download(exportFile,exportFile.name);toast('视频已开始下载，保存后可发给朋友');}};
+  $('publishBtn').onclick=async()=>{if(!exportBlob){toast('先生成分享视频');return;}const bridge=window.xhs&&window.xhs.miniTool;if(!bridge||!bridge.postNote){toast('当前浏览器没有发布接口，请在小红书容器中打开');return;}const reader=new FileReader();reader.onload=async()=>{try{await bridge.postNote({pageType:'video_publish',mediaInfo:{video_resources:{video_url:reader.result}}});toast('已打开视频发布页');}catch(_){toast('发布失败，请重新生成视频');}};reader.readAsDataURL(exportBlob);};
+  $('saveImageBtn').onclick=saveImage;
   window.addEventListener('pagehide',()=>{flushText();persist();});
   renderUI();draw();if(saved)$('draftStatus').textContent='已接着上次的草稿';
 })();
