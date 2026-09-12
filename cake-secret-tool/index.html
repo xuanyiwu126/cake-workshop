@@ -10,16 +10,19 @@
 </head>
 <body>
   <header class="masthead">
-    <a href="./" class="wordmark" aria-label="给你一块首页"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 17 22 7l13 10v17H5Z M5 17h30 M5 26h30 M22 7v10"/></svg><span>给你一块<small>CAKE, WITH LOVE.</small></span></a>
-    <span class="header-note">一些心意，藏在奶油里。</span>
+    <a href="./" class="wordmark" aria-label="给你一块首页"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 17 22 7l13 10v17H5Z M5 17h30 M5 26h30 M22 7v10"/></svg><span>给你一块</span></a>
+    <span class="header-note">一些心意，藏在奶油里</span>
     <button id="resetBtn" class="text-btn">重新做一块 ↗</button>
   </header>
+  <section class="mode-picker" aria-label="选择制作方式">
+    <button class="mode-card active" data-mode="send"><span class="mode-mark">给</span><span><b>做给朋友</b><small>亲手做一块，把想说的话藏进去</small></span><i>→</i></button>
+    <button class="mode-card" data-mode="self"><span class="mode-mark">我</span><span><b>做给自己</b><small>选一句话，给今天的自己一点温柔</small></span><i>→</i></button>
+  </section>
   <main class="workspace">
     <section class="atelier" aria-label="蛋糕制作画布">
       <div class="stage-label"><span>你的手作台</span><span id="draftStatus">从一块蛋糕胚开始</span></div>
       <div class="canvas-wrap"><canvas id="cakeCanvas" width="1080" height="1020" aria-label="蛋糕画布：选择工具后，按住画奶油或点击摆放装饰"></canvas></div>
-      <div class="stage-bottom"><p id="stageHint">先挑一个喜欢的形状。</p><div class="history-tools"><button id="undoBtn" class="text-btn" disabled aria-label="撤销上一次编辑">↶ 撤销</button><button id="redoBtn" class="text-btn" disabled aria-label="恢复上一次编辑">↷ 恢复</button></div></div>
-      <p class="atelier-foot">MADE BY YOU <span>·</span> ONE OF A KIND</p>
+      <div class="stage-bottom"><p id="stageHint"></p><div class="history-tools"><button id="undoBtn" class="text-btn" disabled aria-label="撤销上一次编辑">↶ 撤销</button><button id="redoBtn" class="text-btn" disabled aria-label="恢复上一次编辑">↷ 恢复</button></div></div>
     </section>
     <section class="recipe" aria-label="分步制作">
       <nav id="stepNav" class="steps" aria-label="制作步骤"></nav>
@@ -27,10 +30,10 @@
       <div class="step-footer"><button id="prevBtn" class="text-btn">← 上一步</button><button id="nextBtn" class="primary">下一步 <span>→</span></button></div>
     </section>
   </main>
-  <footer class="page-footer"><span>不必是生日，也值得一块蛋糕。</span><span>给你一块 / 手作工坊</span></footer>
+  <footer class="page-footer"><span>不必是生日，也值得一块蛋糕</span><span>给你一块</span></footer>
   <dialog id="previewDialog" aria-label="蛋糕揭晓预览">
     <div class="preview-layout"><div class="film-wrap"><canvas id="filmCanvas" width="720" height="1280" aria-label="完整蛋糕、切开动画及隐藏留言预览"></canvas></div>
-      <div class="preview-controls"><button id="closePreview" class="text-btn close-preview">← 回去修改</button><p class="eyebrow">A LITTLE SURPRISE</p><h2>切开，才知道。</h2><p class="preview-description">完整的蛋糕、切开的瞬间，<br>还有只想对 TA 说的话。</p><button id="cutBtn" class="primary">切开看看 <span>↗</span></button><button id="exportBtn" class="secondary">导出小视频 ↓</button><div id="exportProgress" hidden><progress max="100" value="0"></progress><p id="progressLabel" role="status">正在制作视频…</p><button id="cancelExport" class="text-btn">取消生成</button></div><div id="shareActions" hidden><button id="publishBtn" class="primary">发布视频笔记 ↗</button><button id="saveImageBtn" class="secondary">保存完整蛋糕图</button></div><p id="exportNote" class="fine-print">竖屏短片 · 完整蛋糕 → 切开 → 留言<br>视频只包含作品，不包含操作界面。</p></div></div>
+      <div class="preview-controls"><button id="closePreview" class="text-btn close-preview">← 回去修改</button><h2>切开，才知道</h2><p class="preview-description">先看到完整的蛋糕，再看切开的瞬间<br>还有只想对 TA 说的话</p><button id="cutBtn" class="primary">切开看看 <span>↗</span></button><button id="exportBtn" class="secondary">导出小视频 ↓</button><div id="exportProgress" hidden><progress max="100" value="0"></progress><p id="progressLabel" role="status">正在制作视频…</p><button id="cancelExport" class="text-btn">取消生成</button></div><div id="shareActions" hidden><button id="publishBtn" class="primary">发布视频笔记 ↗</button><button id="saveImageBtn" class="secondary">保存完整蛋糕图</button></div><p id="exportNote" class="fine-print">竖屏短片 · 完整蛋糕 → 切开 → 留言<br>视频只包含作品，不包含操作界面</p></div></div>
   </dialog>
   <dialog id="resetDialog" class="reset-dialog"><h2>重新做一块？</h2><p>会清空这块蛋糕和留言。</p><div><button id="cancelReset" class="secondary">继续做这块</button><button id="confirmReset" class="primary">重新开始</button></div></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
