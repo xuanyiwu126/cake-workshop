@@ -20,7 +20,7 @@
 ## Try it locally
 
 ```bash
-git clone https://github.com/xuanyiwu126/cake-workshop.git
+git clone https://github.com/yjshen126/cake-workshop.git
 cd cake-workshop
 python3 -m http.server 8000
 ```
