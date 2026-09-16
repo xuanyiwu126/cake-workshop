@@ -2,7 +2,7 @@
 
 ## 项目
 
-- GitHub 仓库：`https://github.com/xuanyiwu126/rednote`
+- GitHub 仓库：`https://github.com/yjshen126/cake-workshop`
 - 项目目录：`cake-secret-tool/`
 - Mac 本地目录：`/Users/sanxuanyi/Desktop/rednote`
 - 本地项目目标目录：`/Users/sanxuanyi/Desktop/rednote/cake-secret-tool/`
@@ -74,4 +74,3 @@ python3 .codex/skills/minitool-zip-builder/scripts/audit_artifact.py cake-secret
 ## 当前限制
 
 当前远程 Codex 无法直接访问 Mac 的 `/Users/sanxuanyi/Desktop/rednote`。因此，GitHub 是远程修改源，本地 Codex 需要在 Mac 上执行 `git pull` 完成同步。
-
