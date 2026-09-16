@@ -6,245 +6,67 @@
   <meta name="description" content="蛋糕工坊产品展示：一个面向手机的互动蛋糕创作与分享体验。">
   <title>蛋糕工坊｜产品展示</title>
   <style>
-    :root{
-      --bg:#ffffff;
-      --soft:#f7f7f7;
-      --soft-red:#fff3f5;
-      --ink:#111111;
-      --muted:#666666;
-      --subtle:#999999;
-      --line:#ececec;
-      --accent:#ff2442;
-      --accent-dark:#e91838;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.7}
-    a{color:inherit}
-    .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-    .navShell{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-    .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-size:16px;font-weight:750;letter-spacing:.01em}
-    .brandDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:9px;vertical-align:1px}
-    .nav a{text-decoration:none}
-    .navlinks{display:flex;gap:28px;font-size:14px;color:var(--muted)}
-    .navlinks a:hover{color:var(--ink)}
-
-    .hero{padding:84px 0 76px;background:linear-gradient(180deg,#fff 0%,#fff 62%,#fafafa 100%)}
-    .heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:72px;align-items:center}
-    .eyebrow{font-size:13px;color:var(--accent);font-weight:750;letter-spacing:.08em}
-    h1{font-size:clamp(50px,7vw,82px);line-height:1.04;letter-spacing:-.055em;margin:18px 0 26px}
-    .lead{font-size:19px;color:var(--muted);max-width:660px;margin:0 0 30px}
-    .heroNote{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:34px 0 0;max-width:650px}
-    .heroNote div{padding-top:14px;border-top:1px solid var(--line)}
-    .heroNote b{display:block;font-size:14px;margin-bottom:4px}
-    .heroNote span{font-size:12px;color:var(--subtle)}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:9px;text-decoration:none;font-weight:700;border:1px solid var(--line);transition:.2s ease}
-    .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-    .btn.primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
-    .btn.secondary{background:#fff;color:var(--ink)}
-    .btn.secondary:hover{background:var(--soft)}
-
-    .previewPanel{background:var(--soft);border-radius:20px;padding:34px 28px}
-    .phone{width:min(340px,100%);margin:auto;background:#101010;border-radius:32px;padding:9px;box-shadow:0 24px 64px rgba(0,0,0,.14)}
-    .phone iframe{width:100%;height:680px;border:0;border-radius:24px;background:white;display:block}
-    .previewCaption{margin:18px auto 0;max-width:340px;font-size:12px;color:var(--subtle);text-align:center}
-
-    .section{padding:82px 0;border-top:1px solid var(--line)}
-    .sectionHead{display:grid;grid-template-columns:210px 1fr;gap:54px;margin-bottom:46px}
-    .sectionHead h2{font-size:38px;line-height:1.2;margin:0 0 14px;letter-spacing:-.03em}
-    .sectionHead p{margin:0;color:var(--muted);max-width:770px;font-size:16px}
-
-    .positionIntro{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-bottom:22px}
-    .positionMain{background:var(--soft-red);padding:34px;border-radius:14px}
-    .positionMain h3{font-size:25px;line-height:1.3;margin:0 0 14px;letter-spacing:-.02em}
-    .positionMain p{margin:0;color:#555;max-width:650px}
-    .sceneBox{background:var(--soft);padding:30px;border-radius:14px}
-    .sceneBox h3{font-size:18px;margin:0 0 14px}
-    .sceneList{display:grid;gap:13px}
-    .sceneItem{display:grid;grid-template-columns:78px 1fr;gap:10px;font-size:14px}
-    .sceneItem b{font-size:13px;color:var(--ink)}
-    .sceneItem span{color:var(--muted)}
-
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .card{background:#fff;border:1px solid var(--line);padding:25px 24px;border-radius:12px}
-    .card b{display:block;font-size:17px;margin-bottom:8px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .card .mark{font-size:12px;color:var(--accent);font-weight:750;margin-bottom:16px}
-
-    .experienceLead{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
-    .experienceHero{padding:32px;border-radius:14px;background:var(--ink);color:#fff}
-    .experienceHero h3{font-size:26px;margin:0 0 12px;letter-spacing:-.02em}
-    .experienceHero p{margin:0;color:#cfcfcf}
-    .experienceHero strong{color:#fff}
-    .experienceAside{padding:32px;border-radius:14px;background:var(--soft)}
-    .experienceAside h3{font-size:21px;margin:0 0 12px}
-    .experienceAside p{margin:0;color:var(--muted)}
-
-    .featureGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 34px}
-    .feature{padding:28px 0;border-top:1px solid var(--line)}
-    .featureTag{font-size:12px;color:var(--accent);font-weight:750;margin-bottom:6px}
-    .feature h3{margin:0 0 9px;font-size:20px}
-    .feature p{margin:0;color:var(--muted);max-width:500px;font-size:14px}
-
-    .flow{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .step{padding:28px 20px;border-right:1px solid var(--line)}
-    .step:last-child{border-right:0}
-    .num{font-size:12px;color:var(--accent);font-weight:750}
-    .step b{display:block;margin:9px 0 7px;font-size:16px}
-    .step p{font-size:13px;color:var(--muted);margin:0}
-
-    .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-    .principle{padding:24px 0;border-top:2px solid var(--ink)}
-    .principle b{display:block;font-size:16px;margin-bottom:8px}
-    .principle p{margin:0;font-size:13px;color:var(--muted)}
-
-    .final{padding:94px 0 108px;text-align:center;background:var(--soft)}
-    .final h2{font-size:42px;margin:0 0 14px;letter-spacing:-.03em}
-    .final p{color:var(--muted);margin:0 0 28px}
-    .footer{padding:26px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:20px}
-
-    @media(max-width:900px){
-      .heroGrid,.sectionHead,.positionIntro,.experienceLead{grid-template-columns:1fr}
-      .hero{padding-top:54px}.sectionHead{gap:12px}.grid4{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.featureGrid{grid-template-columns:1fr}.principles{grid-template-columns:1fr}.phone iframe{height:650px}.navlinks{display:none}.previewPanel{padding:24px}.heroNote{grid-template-columns:1fr 1fr 1fr}
-    }
-    @media(max-width:560px){
-      .wrap{width:min(100% - 24px,1120px)}h1{font-size:48px}.lead{font-size:17px}.phone iframe{height:620px}.section{padding:58px 0}.sectionHead h2{font-size:31px}.grid4{grid-template-columns:1fr}.heroNote{grid-template-columns:1fr}.final h2{font-size:34px}.positionMain,.sceneBox,.experienceHero,.experienceAside{padding:24px}.sceneItem{grid-template-columns:70px 1fr}
-    }
+    :root{--bg:#fff;--soft:#f7f7f7;--soft-red:#fff3f5;--ink:#111;--muted:#666;--subtle:#999;--line:#ececec;--accent:#ff2442;--accent-dark:#e91838}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.7}a{color:inherit}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    .navShell{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:64px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:16px;font-weight:750}.brandDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:9px;vertical-align:1px}.nav a{text-decoration:none}.navlinks{display:flex;gap:26px;font-size:14px;color:var(--muted)}.navlinks a:hover{color:var(--ink)}
+    .hero{padding:84px 0 76px;background:linear-gradient(180deg,#fff 0%,#fff 62%,#fafafa 100%)}.heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:72px;align-items:center}.eyebrow{font-size:13px;color:var(--accent);font-weight:750;letter-spacing:.08em}h1{font-size:clamp(50px,7vw,82px);line-height:1.04;letter-spacing:-.055em;margin:18px 0 26px}.lead{font-size:19px;color:var(--muted);max-width:660px;margin:0 0 30px}.heroNote{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:34px 0 0;max-width:650px}.heroNote div{padding-top:14px;border-top:1px solid var(--line)}.heroNote b{display:block;font-size:14px;margin-bottom:4px}.heroNote span{font-size:12px;color:var(--subtle)}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:9px;text-decoration:none;font-weight:700;border:1px solid var(--line);transition:.2s ease}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}.btn.secondary{background:#fff;color:var(--ink)}.btn.secondary:hover{background:var(--soft)}
+    .previewPanel{background:var(--soft);border-radius:20px;padding:34px 28px}.phone{width:min(340px,100%);margin:auto;background:#101010;border-radius:32px;padding:9px;box-shadow:0 24px 64px rgba(0,0,0,.14)}.phone iframe{width:100%;height:680px;border:0;border-radius:24px;background:white;display:block}.previewCaption{margin:18px auto 0;max-width:340px;font-size:12px;color:var(--subtle);text-align:center}
+    .section{padding:82px 0;border-top:1px solid var(--line)}.sectionHead{display:grid;grid-template-columns:210px 1fr;gap:54px;margin-bottom:46px}.sectionHead h2{font-size:38px;line-height:1.2;margin:0 0 14px;letter-spacing:-.03em}.sectionHead p{margin:0;color:var(--muted);max-width:770px;font-size:16px}
+    .positionIntro{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-bottom:22px}.positionMain{background:var(--soft-red);padding:34px;border-radius:14px}.positionMain h3{font-size:25px;line-height:1.3;margin:0 0 14px;letter-spacing:-.02em}.positionMain p{margin:0;color:#555;max-width:650px}.sceneBox{background:var(--soft);padding:30px;border-radius:14px}.sceneBox h3{font-size:18px;margin:0 0 14px}.sceneList{display:grid;gap:13px}.sceneItem{display:grid;grid-template-columns:78px 1fr;gap:10px;font-size:14px}.sceneItem b{font-size:13px}.sceneItem span{color:var(--muted)}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border:1px solid var(--line);padding:25px 24px;border-radius:12px}.card b{display:block;font-size:17px;margin-bottom:8px}.card p{margin:0;color:var(--muted);font-size:14px}.card .mark{font-size:12px;color:var(--accent);font-weight:750;margin-bottom:16px}
+    .experienceLead{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}.experienceHero{padding:32px;border-radius:14px;background:var(--ink);color:#fff}.experienceHero h3{font-size:26px;margin:0 0 12px}.experienceHero p{margin:0;color:#cfcfcf}.experienceHero strong{color:#fff}.experienceAside{padding:32px;border-radius:14px;background:var(--soft)}.experienceAside h3{font-size:21px;margin:0 0 12px}.experienceAside p{margin:0;color:var(--muted)}.featureGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 34px}.feature{padding:28px 0;border-top:1px solid var(--line)}.featureTag{font-size:12px;color:var(--accent);font-weight:750;margin-bottom:6px}.feature h3{margin:0 0 9px;font-size:20px}.feature p{margin:0;color:var(--muted);max-width:500px;font-size:14px}
+    .shotsSection{background:#fafafa}.shotsIntro{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:28px}.shotsIntro p{margin:0;color:var(--muted);max-width:720px}.shotGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.shotCard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}.shotCard.wide{grid-column:1/-1}.shotMeta{padding:20px 22px 18px;border-bottom:1px solid var(--line)}.shotMeta .shotNo{font-size:12px;color:var(--accent);font-weight:750}.shotMeta h3{margin:5px 0 6px;font-size:20px}.shotMeta p{margin:0;color:var(--muted);font-size:13px}.shotCanvas{background:#f1f1f1;padding:22px;display:flex;justify-content:center;min-height:600px}.deviceShot{width:min(360px,100%);background:#111;border-radius:28px;padding:8px;box-shadow:0 16px 42px rgba(0,0,0,.12)}.deviceShot iframe{display:block;width:100%;height:640px;border:0;border-radius:21px;background:#fff;pointer-events:none}.shotHint{margin-top:16px;color:var(--subtle);font-size:12px}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.step{padding:28px 20px;border-right:1px solid var(--line)}.step:last-child{border-right:0}.num{font-size:12px;color:var(--accent);font-weight:750}.step b{display:block;margin:9px 0 7px;font-size:16px}.step p{font-size:13px;color:var(--muted);margin:0}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.principle{padding:24px 0;border-top:2px solid var(--ink)}.principle b{display:block;font-size:16px;margin-bottom:8px}.principle p{margin:0;font-size:13px;color:var(--muted)}
+    .final{padding:94px 0 108px;text-align:center;background:var(--soft)}.final h2{font-size:42px;margin:0 0 14px;letter-spacing:-.03em}.final p{color:var(--muted);margin:0 0 28px}.footer{padding:26px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:900px){.heroGrid,.sectionHead,.positionIntro,.experienceLead{grid-template-columns:1fr}.hero{padding-top:54px}.sectionHead{gap:12px}.grid4{grid-template-columns:1fr 1fr}.featureGrid{grid-template-columns:1fr}.shotGrid{grid-template-columns:1fr}.shotCard.wide{grid-column:auto}.flow{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.principles{grid-template-columns:1fr}.phone iframe{height:650px}.navlinks{display:none}.previewPanel{padding:24px}.heroNote{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:560px){.wrap{width:min(100% - 24px,1120px)}h1{font-size:48px}.lead{font-size:17px}.phone iframe{height:620px}.section{padding:58px 0}.sectionHead h2{font-size:31px}.grid4{grid-template-columns:1fr}.heroNote{grid-template-columns:1fr}.final h2{font-size:34px}.positionMain,.sceneBox,.experienceHero,.experienceAside{padding:24px}.sceneItem{grid-template-columns:70px 1fr}.shotCanvas{padding:12px;min-height:520px}.deviceShot iframe{height:560px}}
   </style>
 </head>
 <body>
-  <div class="navShell">
-    <div class="wrap">
-      <nav class="nav">
-        <div class="brand"><span class="brandDot"></span>蛋糕工坊</div>
-        <div class="navlinks"><a href="#position">产品定位</a><a href="#experience">核心体验</a><a href="#flow">体验流程</a></div>
-      </nav>
-    </div>
-  </div>
+  <div class="navShell"><div class="wrap"><nav class="nav"><div class="brand"><span class="brandDot"></span>蛋糕工坊</div><div class="navlinks"><a href="#position">产品定位</a><a href="#experience">核心体验</a><a href="#screens">实机画面</a><a href="#flow">体验流程</a></div></nav></div></div>
 
-  <header class="hero">
-    <div class="wrap heroGrid">
-      <div>
-        <div class="eyebrow">Cake Workshop · 蛋糕工坊</div>
-        <h1>做一块蛋糕，<br>把心意藏进去。</h1>
-        <p class="lead">一个面向手机的轻量创作工具。用户可以自由设计蛋糕，把文字、手绘内容或照片藏进作品，并通过拆礼盒、切蛋糕等互动完成揭晓，让一块数字蛋糕既能被制作，也能被送出去。</p>
-        <div class="actions">
-          <a class="btn primary" href="./" target="_blank" rel="noopener">立即体验</a>
-          <a class="btn secondary" href="https://github.com/yjshen126/cake-workshop" target="_blank" rel="noopener">查看 GitHub</a>
-        </div>
-        <div class="heroNote">
-          <div><b>轻量创作</b><span>不用学习复杂工具也能做出自己的作品</span></div>
-          <div><b>情绪表达</b><span>作品里可以真正藏入一句话或一张照片</span></div>
-          <div><b>分享传播</b><span>结果不仅能看，还能作为礼物被揭晓和转发</span></div>
-        </div>
-      </div>
-      <div class="previewPanel">
-        <div class="phone" aria-label="蛋糕工坊实时预览">
-          <iframe src="./" title="蛋糕工坊实时预览" loading="lazy"></iframe>
-        </div>
-        <div class="previewCaption">右侧为真实产品，可直接操作体验</div>
-      </div>
-    </div>
-  </header>
+  <header class="hero"><div class="wrap heroGrid"><div><div class="eyebrow">Cake Workshop · 蛋糕工坊</div><h1>做一块蛋糕，<br>把心意藏进去。</h1><p class="lead">一个面向手机的轻量创作工具。用户可以自由设计蛋糕，把文字、手绘内容或照片藏进作品，并通过拆礼盒、切蛋糕等互动完成揭晓，让一块数字蛋糕既能被制作，也能被送出去。</p><div class="actions"><a class="btn primary" href="./" target="_blank" rel="noopener">立即体验</a><a class="btn secondary" href="https://github.com/yjshen126/cake-workshop" target="_blank" rel="noopener">查看 GitHub</a></div><div class="heroNote"><div><b>轻量创作</b><span>不用学习复杂工具也能做出自己的作品</span></div><div><b>情绪表达</b><span>作品里可以真正藏入一句话或一张照片</span></div><div><b>分享传播</b><span>结果不仅能看，还能作为礼物被揭晓和转发</span></div></div></div><div class="previewPanel"><div class="phone" aria-label="蛋糕工坊实时预览"><iframe src="./" title="蛋糕工坊实时预览" loading="lazy"></iframe></div><div class="previewCaption">右侧为真实产品，可直接操作体验</div></div></div></header>
 
-  <section class="section" id="position">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div class="eyebrow">产品定位</div>
-        <div>
-          <h2>不是模拟烘焙，而是把“做蛋糕”变成一种轻量的数字表达</h2>
-          <p>真实蛋糕的价值往往不只在“吃”，而在生日、纪念、祝福和关系表达。蛋糕工坊把这种情绪价值转成可在线完成的创作体验：用户不需要绘画基础，也不需要复杂编辑能力，只要通过几个简单步骤，就可以得到一块有个人选择、有隐藏内容、也有揭晓反馈的数字蛋糕。</p>
-        </div>
-      </div>
+  <section class="section" id="position"><div class="wrap"><div class="sectionHead"><div class="eyebrow">产品定位</div><div><h2>不是模拟烘焙，而是把“做蛋糕”变成一种轻量的数字表达</h2><p>真实蛋糕的价值往往不只在“吃”，而在生日、纪念、祝福和关系表达。蛋糕工坊把这种情绪价值转成可在线完成的创作体验：用户不需要绘画基础，也不需要复杂编辑能力，只要通过几个简单步骤，就可以得到一块有个人选择、有隐藏内容、也有揭晓反馈的数字蛋糕。</p></div></div><div class="positionIntro"><div class="positionMain"><h3>核心任务：让用户愿意亲手做，而不是只生成一张结果图</h3><p>产品保留选择形状、抹奶油、放装饰、藏信息和揭晓这些参与过程。用户的每一步选择都会改变最终作品，因此分享出去的不只是一个模板，而是一份带有个人操作痕迹的内容。互动过程本身就是产品价值的一部分。</p></div><div class="sceneBox"><h3>主要使用场景</h3><div class="sceneList"><div class="sceneItem"><b>送给朋友</b><span>生日、纪念日、鼓励、道歉或日常小惊喜</span></div><div class="sceneItem"><b>做给自己</b><span>把一句想对自己说的话，做成可保存的小作品</span></div><div class="sceneItem"><b>社交分享</b><span>将蛋糕、隐藏信息和揭晓过程转成可传播内容</span></div></div></div></div><div class="grid4"><div class="card"><div class="mark">01 · 低门槛</div><b>几分钟完成一块蛋糕</b><p>通过明确步骤和直接操作，把自由创作控制在容易理解的范围内。</p></div><div class="card"><div class="mark">02 · 个性化</div><b>每一步都留下个人选择</b><p>形状、口味、奶油、装饰、文字和照片共同组成作品。</p></div><div class="card"><div class="mark">03 · 情绪价值</div><b>信息真正藏在蛋糕里</b><p>隐藏内容让“打开”和“切开”具备明确期待感。</p></div><div class="card"><div class="mark">04 · 可传播</div><b>分享的是一次体验</b><p>礼盒、彩纸和切开反馈让静态作品变成完整的揭晓过程。</p></div></div></div></section>
 
-      <div class="positionIntro">
-        <div class="positionMain">
-          <h3>核心任务：让用户愿意亲手做，而不是只生成一张结果图</h3>
-          <p>产品刻意保留“选择形状—抹奶油—放装饰—藏信息—揭晓”的参与过程。用户的每一步选择都会改变最终作品，因此分享出去的不只是一个模板，而是一份带有个人操作痕迹的内容。相比直接输入一句 Prompt 生成图片，互动过程本身就是产品价值的一部分。</p>
-        </div>
-        <div class="sceneBox">
-          <h3>主要使用场景</h3>
-          <div class="sceneList">
-            <div class="sceneItem"><b>送给朋友</b><span>生日、纪念日、鼓励、道歉或日常小惊喜</span></div>
-            <div class="sceneItem"><b>做给自己</b><span>把一句想对自己说的话，做成可保存的小作品</span></div>
-            <div class="sceneItem"><b>社交分享</b><span>将蛋糕、隐藏信息和揭晓过程转成可传播内容</span></div>
-          </div>
-        </div>
-      </div>
+  <section class="section" id="experience"><div class="wrap"><div class="sectionHead"><div class="eyebrow">核心体验</div><div><h2>把“创作感”和“揭晓感”放在同一条体验链路里</h2><p>前半段让用户持续看到自己的蛋糕发生变化，后半段把隐藏信息和切开展示组合起来，让创作结果获得一个明确高潮。完成之后，作品还可以继续保存、查看、再次分享和二次创作。</p></div></div><div class="experienceLead"><div class="experienceHero"><h3>创作时要有掌控感</h3><p>用户能够直接看到操作反馈，随时撤销、恢复、调整大小和视角。重点是保证<strong>每一次点击、拖动和选择都能立即改变当前作品</strong>。</p></div><div class="experienceAside"><h3>完成时要有“值得分享”的一刻</h3><p>如果完成页只展示一张静态图，前面的创作过程很容易失去价值。因此产品把切开蛋糕、隐藏信息揭晓和分享结果做成一个明确的收尾节点。</p></div></div><div class="featureGrid"><div class="feature"><div class="featureTag">自由编辑</div><h3>画布式蛋糕创作</h3><p>在同一块蛋糕上持续修改形状、口味、奶油和装饰，支持触摸操作、撤销恢复、缩放与视角调整。</p></div><div class="feature"><div class="featureTag">降低空白页压力</div><h3>今日灵感</h3><p>当用户没有明确想法时，通过灵感入口提供可以直接开始的方向。</p></div><div class="feature"><div class="featureTag">内容承载</div><h3>把文字或照片藏进蛋糕</h3><p>隐藏信息不是附加文案，而是作品的一部分，等待接收者在揭晓环节看到。</p></div><div class="feature"><div class="featureTag">情绪反馈</div><h3>切开揭晓</h3><p>通过切开动作与内容浮现建立节奏，让接收者不是直接看见结果，而是主动完成揭晓。</p></div><div class="feature"><div class="featureTag">分享产物</div><h3>生成可继续传播的内容</h3><p>完成后生成礼物视频预览与高清图片内容，降低额外编辑成本。</p></div><div class="feature"><div class="featureTag">留存与再创作</div><h3>我的蛋糕柜</h3><p>完成作品保存在当前设备，可再次查看、分享、移除或继续做新变化。</p></div></div></div></section>
 
-      <div class="grid4">
-        <div class="card"><div class="mark">01 · 低门槛</div><b>几分钟完成一块蛋糕</b><p>通过明确的步骤和直接操作，把自由创作控制在容易理解的范围内，不要求用户掌握专业设计工具。</p></div>
-        <div class="card"><div class="mark">02 · 个性化</div><b>每一步都留下个人选择</b><p>形状、口味、奶油、装饰、文字和照片共同组成作品，让结果具备足够的差异化。</p></div>
-        <div class="card"><div class="mark">03 · 情绪价值</div><b>信息不是写在旁边，而是藏在里面</b><p>隐藏内容让蛋糕本身成为信息载体，使“打开”和“切开”具有明确的期待感。</p></div>
-        <div class="card"><div class="mark">04 · 可传播</div><b>分享的是一次体验</b><p>通过礼盒、彩纸、切开等反馈，把静态作品转成更适合社交传播的动态揭晓过程。</p></div>
-      </div>
-    </div>
-  </section>
+  <section class="section shotsSection" id="screens"><div class="wrap"><div class="sectionHead"><div class="eyebrow">实机画面</div><div><h2>把关键交互直接放进作品集，而不是只用文字解释</h2><p>下面不是重新绘制的示意图，而是同一套真实产品页面在不同状态下的只读预览。通过这些实机画面，可以直接看到创作、藏入信息、切开准备、揭晓以及作品管理的界面变化。</p></div></div><div class="shotGrid">
+    <article class="shotCard"><div class="shotMeta"><div class="shotNo">01 · 制作蛋糕</div><h3>先让作品发生明显变化</h3><p>形状、口味、奶油和装饰都直接作用在同一块画布上，用户始终看得到“我刚刚改了什么”。</p></div><div class="shotCanvas"><div class="deviceShot"><iframe id="shot-build" title="制作蛋糕实机画面" src="about:blank"></iframe></div></div></article>
+    <article class="shotCard"><div class="shotMeta"><div class="shotNo">02 · 藏入信息</div><h3>蛋糕同时也是信息载体</h3><p>进入下一步后，用户选择自定义文字、随机惊喜或照片，让作品具备明确的送礼内容。</p></div><div class="shotCanvas"><div class="deviceShot"><iframe id="shot-message" title="藏入信息实机画面" src="about:blank"></iframe></div></div></article>
+    <article class="shotCard"><div class="shotMeta"><div class="shotNo">03 · 准备切开</div><h3>用动作替代“点击查看答案”</h3><p>隐藏内容不会直接弹出，而是要求用户沿引导完成切开动作，给揭晓增加一个可感知的过程。</p></div><div class="shotCanvas"><div class="deviceShot"><iframe id="shot-cut" title="准备切开实机画面" src="about:blank"></iframe></div></div></article>
+    <article class="shotCard"><div class="shotMeta"><div class="shotNo">04 · 切开揭晓</div><h3>切面与隐藏心意一起出现</h3><p>切开后蛋糕分离，隐藏文字同步浮现，形成整个体验中最重要的情绪反馈。</p></div><div class="shotCanvas"><div class="deviceShot"><iframe id="shot-reveal" title="切开揭晓实机画面" src="about:blank"></iframe></div></div></article>
+    <article class="shotCard wide"><div class="shotMeta"><div class="shotNo">05 · 蛋糕柜</div><h3>完成之后还有作品管理入口</h3><p>通过蛋糕柜承接已完成作品，支持再次查看、分享、移除和二次创作，避免产品只停留在一次性生成。</p></div><div class="shotCanvas"><div class="deviceShot"><iframe id="shot-cabinet" title="蛋糕柜实机画面" src="about:blank"></iframe></div></div></article>
+  </div><div class="shotHint">实机画面为只读预览；页面顶部的“立即体验”可打开完整可操作版本。</div></div></section>
 
-  <section class="section" id="experience">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div class="eyebrow">核心体验</div>
-        <div>
-          <h2>把“创作感”和“揭晓感”放在同一条体验链路里</h2>
-          <p>产品体验不是简单的素材拼贴。前半段让用户持续看到自己的蛋糕发生变化，后半段把隐藏信息、礼物包装和切开展示组合起来，让创作结果获得一个明确的高潮。完成之后，作品还可以继续保存、查看、再次分享和二次创作。</p>
-        </div>
-      </div>
+  <section class="section" id="flow"><div class="wrap"><div class="sectionHead"><div class="eyebrow">体验流程</div><div><h2>五个连续步骤，把创作自然推进到分享</h2><p>主流程始终围绕同一块蛋糕展开，每一步只增加一个新的创作决策，让复杂度逐步出现，而不是一次性全部暴露。</p></div></div><div class="flow"><div class="step"><span class="num">01</span><b>选择蛋糕</b><p>确定形状与基础风格。</p></div><div class="step"><span class="num">02</span><b>添加奶油</b><p>选择口味与表面效果。</p></div><div class="step"><span class="num">03</span><b>自由装饰</b><p>添加水果和装饰并调整画面。</p></div><div class="step"><span class="num">04</span><b>藏入信息</b><p>加入文字、手绘或照片。</p></div><div class="step"><span class="num">05</span><b>揭晓分享</b><p>切开蛋糕并生成可传播结果。</p></div></div><div class="principles"><div class="principle"><b>先看到结果，再继续操作</b><p>每一步都尽快给用户视觉反馈，让创作持续有进展感。</p></div><div class="principle"><b>减少说明，强化直接操作</b><p>优先用按钮、画布和即时反馈表达功能。</p></div><div class="principle"><b>把高潮留在完成之后</b><p>完成不是流程结束，而是进入揭晓和分享的关键节点。</p></div></div></div></section>
 
-      <div class="experienceLead">
-        <div class="experienceHero">
-          <h3>创作时要有掌控感</h3>
-          <p>用户能够直接看到操作反馈，随时撤销、恢复、调整大小和视角。重点不是堆更多素材，而是保证<strong>每一次点击、拖动和选择都能立即改变当前作品</strong>，让用户持续感受到“这是我做的”。</p>
-        </div>
-        <div class="experienceAside">
-          <h3>完成时要有“值得分享”的一刻</h3>
-          <p>如果完成页只展示一张静态图，前面的创作过程很容易失去价值。因此产品加入拆礼盒、彩纸反馈、切开蛋糕和隐藏信息揭晓，让结尾成为一次可以被期待、被观看的事件。</p>
-        </div>
-      </div>
-
-      <div class="featureGrid">
-        <div class="feature"><div class="featureTag">自由编辑</div><h3>画布式蛋糕创作</h3><p>用户可以在同一块蛋糕上持续修改形状、口味、奶油和装饰，支持触摸操作、撤销恢复、缩放与视角调整，减少页面跳转带来的割裂感。</p></div>
-        <div class="feature"><div class="featureTag">降低空白页压力</div><h3>今日灵感</h3><p>当用户没有明确想法时，通过灵感入口提供一个可以直接开始的方向，让“先做起来”比“先想清楚”更容易。</p></div>
-        <div class="feature"><div class="featureTag">内容承载</div><h3>把文字或照片藏进蛋糕</h3><p>隐藏信息不是装饰性的附加文案，而是作品的一部分。用户可以把一句话、手绘内容或原图照片藏入蛋糕，等待接收者在揭晓环节看到。</p></div>
-        <div class="feature"><div class="featureTag">情绪反馈</div><h3>拆礼盒与切开揭晓</h3><p>通过礼物打开、彩纸礼花和切开动作建立节奏感，让接收者不是“看见结果”，而是逐步打开这份内容。</p></div>
-        <div class="feature"><div class="featureTag">分享产物</div><h3>生成可继续传播的内容</h3><p>完成后可生成礼物视频预览与高清图片内容，降低用户把作品带到社交场景中的额外编辑成本。</p></div>
-        <div class="feature"><div class="featureTag">留存与再创作</div><h3>我的蛋糕柜</h3><p>已经完成的作品保存在当前设备中，用户可以再次查看、分享、移除，或以已有作品为起点继续做新变化，避免工具只被使用一次。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="flow">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div class="eyebrow">体验流程</div>
-        <div><h2>五个连续步骤，把创作自然推进到分享</h2><p>主流程始终围绕同一块蛋糕展开，用户不需要在多个页面间反复切换。每一步只增加一个新的创作决策，让复杂度逐步出现，而不是一次性全部暴露。</p></div>
-      </div>
-      <div class="flow">
-        <div class="step"><span class="num">01</span><b>选择蛋糕</b><p>确定形状与基础风格，快速建立第一版作品。</p></div>
-        <div class="step"><span class="num">02</span><b>添加奶油</b><p>选择口味与表面效果，让蛋糕产生明显变化。</p></div>
-        <div class="step"><span class="num">03</span><b>自由装饰</b><p>添加水果和装饰，并通过缩放、视角等工具调整画面。</p></div>
-        <div class="step"><span class="num">04</span><b>藏入信息</b><p>加入文字、手绘或照片，把作品变成真正的内容载体。</p></div>
-        <div class="step"><span class="num">05</span><b>揭晓分享</b><p>通过拆礼与切开反馈完成收尾，并生成可继续传播的内容。</p></div>
-      </div>
-
-      <div class="principles">
-        <div class="principle"><b>先看到结果，再继续操作</b><p>每一步都尽快给用户视觉反馈，让创作过程持续有进展感。</p></div>
-        <div class="principle"><b>减少说明，强化直接操作</b><p>优先用按钮、画布和即时反馈表达功能，避免把产品做成阅读说明书。</p></div>
-        <div class="principle"><b>把高潮留在完成之后</b><p>完成不是流程结束，而是进入礼物揭晓和分享的关键节点。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="final">
-    <div class="wrap">
-      <h2>亲手做一块。</h2>
-      <p>无需安装，开启 GitHub Pages 后即可直接在手机或电脑浏览器中体验。</p>
-      <a class="btn primary" href="./" target="_blank" rel="noopener">打开蛋糕工坊</a>
-    </div>
-  </section>
-
+  <section class="final"><div class="wrap"><h2>亲手做一块。</h2><p>无需安装，打开网页即可在手机或电脑浏览器中体验。</p><a class="btn primary" href="./" target="_blank" rel="noopener">打开蛋糕工坊</a></div></section>
   <footer class="wrap footer"><span>Cake Workshop · 蛋糕工坊</span><span>© 2026 Yujie Shen</span></footer>
+
+  <script>
+  (async function(){
+    const draftKey='cake-note-studio-v4', coachKey='cake-tool-drawer-coach';
+    let oldDraft=null,oldCoach=null;
+    try{oldDraft=localStorage.getItem(draftKey);oldCoach=localStorage.getItem(coachKey);localStorage.setItem(coachKey,'seen');}catch(_){ }
+    const base={version:4,messageMode:null,shape:'heart',flavor:'strawberry',lace:'shell',coat:'#efb4bd',strokes:[{kind:'rosette',color:'#fff5df',size:21,points:[{x:-125,y:-70},{x:118,y:-74},{x:-110,y:82},{x:112,y:80}]}],toppings:[{kind:'strawberry',x:-52,y:-36,size:34,rot:-.08},{kind:'flower',x:54,y:-44,size:28,rot:.08},{kind:'blueberry',x:8,y:46,size:27,rot:0},{kind:'mint',x:82,y:48,size:25,rot:.12}],message:'',photo:'',step:0};
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    function state(overrides){return Object.assign(JSON.parse(JSON.stringify(base)),overrides||{});}
+    function loadFrame(id,s,after){return new Promise(resolve=>{
+      const frame=document.getElementById(id);if(!frame){resolve();return;}
+      try{localStorage.setItem(draftKey,JSON.stringify(s));}catch(_){ }
+      frame.onload=async()=>{try{const w=frame.contentWindow;w.addEventListener('pagehide',e=>e.stopImmediatePropagation(),true);if(after)await after(w,frame);}catch(_){ }resolve();};
+      frame.src='./?portfolio-preview='+encodeURIComponent(id)+'&t='+Date.now();
+    });}
+    async function goToCut(w){const b=w.document.getElementById('nextBtn');if(b)b.click();await sleep(180);}
+    async function performCut(w){const c=w.document.getElementById('cakeCanvas');if(!c)return;const r=c.getBoundingClientRect();const map=(x,y)=>({x:r.left+x/720*r.width,y:r.top+y/680*r.height});const a=map(226,197),z=map(494,396),pid=27;const pe=(type,x,y,buttons)=>new w.PointerEvent(type,{bubbles:true,cancelable:true,pointerId:pid,pointerType:'mouse',isPrimary:true,clientX:x,clientY:y,buttons:buttons});c.dispatchEvent(pe('pointerdown',a.x,a.y,1));for(let i=1;i<=14;i++){const t=i/14;w.dispatchEvent(pe('pointermove',a.x+(z.x-a.x)*t,a.y+(z.y-a.y)*t,1));await sleep(16);}w.dispatchEvent(pe('pointerup',z.x,z.y,0));await sleep(900);}
+    await loadFrame('shot-build',state({step:0}));
+    await loadFrame('shot-message',state({step:1,messageMode:'custom',message:'祝你开心，在数不尽的明天！'}));
+    await loadFrame('shot-cut',state({step:1,messageMode:'custom',message:'祝你开心，在数不尽的明天！'}),async w=>{await goToCut(w);});
+    await loadFrame('shot-reveal',state({step:1,messageMode:'custom',message:'祝你开心，在数不尽的明天！'}),async w=>{await goToCut(w);await performCut(w);});
+    await loadFrame('shot-cabinet',state({step:0}),async w=>{await sleep(160);const b=w.document.getElementById('cabinetBtn');if(b)b.click();await sleep(120);});
+    try{if(oldDraft===null)localStorage.removeItem(draftKey);else localStorage.setItem(draftKey,oldDraft);if(oldCoach===null)localStorage.removeItem(coachKey);else localStorage.setItem(coachKey,oldCoach);}catch(_){ }
+  })();
+  </script>
 </body>
 </html>
