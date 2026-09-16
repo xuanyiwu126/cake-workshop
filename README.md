@@ -1,52 +1,29 @@
 <h1 align="center">Cake Workshop · 蛋糕工坊</h1>
 
 <p align="center">
-  <strong>Craft a cake. Hide a little feeling. Slice open a surprise.</strong><br>
-  做一块蛋糕，把一份心意藏进去。
+  做一块蛋糕，把一句话、一张照片，或一点只想留给某个人的心意藏进去。
 </p>
 
-一个面向手机的 Canvas 互动体验：装饰蛋糕，把文字或照片藏进礼物，再通过拆礼盒、切蛋糕的仪式感揭晓并分享。
+## 产品概念
 
-## Online Experience
+蛋糕工坊不是单纯的蛋糕装饰工具，而是一个围绕「制作 — 藏入 — 揭晓 — 分享」设计的互动小工具。
 
-- **直接体验**：https://yjshen126.github.io/cake-workshop/
-- **产品展示页**：https://yjshen126.github.io/cake-workshop/portfolio.html
+用户可以亲手选择蛋糕形状、口味、奶油和装饰，把想说的话、手绘内容或照片藏进蛋糕里；完成制作后，再通过拆开礼盒、切开蛋糕等动作揭晓隐藏内容，让一块虚拟蛋糕真正变成一份可以被送出、被打开的数字礼物。
 
-> GitHub Pages 开启后，上述地址即可直接在浏览器中访问。`index.html` 是实际可玩的产品入口，`portfolio.html` 用于产品作品集展示。
+它既可以用来做给朋友，也可以做给自己：前者更强调祝福、惊喜和分享，后者更像一次轻量的自我表达与情绪收藏。
 
-## Highlights
+## 在线体验
 
-- 多种蛋糕形状、口味、奶油和装饰，支持触摸操作、撤销/恢复、缩放和调整视角
-- 将文字、手绘内容或原图照片藏入蛋糕
-- 拆礼盒、彩纸礼花、切开揭晓的分享视频，以及高清图片笔记
-- Cake Cabinet：本地保存、查看、再次分享或移除作品
-- 离线优先：无后端、无 CDN、无外部运行时依赖
+- **直接体验蛋糕工坊**：https://yjshen126.github.io/cake-workshop/
+- **查看产品展示页**：https://yjshen126.github.io/cake-workshop/portfolio.html
 
-## Local Development
+## 核心体验
 
-下面这组命令只用于开发者在自己的电脑上运行项目，普通体验者不需要执行。
+- **自由做蛋糕**：选择不同的蛋糕形状、口味、奶油与装饰，并支持触摸操作、撤销恢复、缩放和视角调整。
+- **把心意藏进去**：可以加入文字、手绘内容或照片，让蛋糕不仅是视觉创作，也承载一段只在揭晓时出现的信息。
+- **让揭晓本身有仪式感**：通过拆礼盒、切蛋糕、彩纸礼花等反馈，把“看到结果”变成一段完整的打开体验。
+- **完成后继续保存与分享**：生成适合分享的图片或视频，并通过蛋糕柜保存、查看和再次分享已经完成的作品。
 
-```bash
-git clone https://github.com/yjshen126/cake-workshop.git
-cd cake-workshop
-python3 -m http.server 8000
-```
+## 产品目标
 
-然后在本机打开 <http://localhost:8000>。
-
-## Project structure
-
-```text
-index.html      # 产品体验入口
-portfolio.html  # 产品展示页
-styles.css
-app.js
-assets/
-data/
-docs/
-dist/
-```
-
-## License
-
-[MIT License](LICENSE) © 2026 Yujie Shen
+相比一次性的蛋糕编辑器，我更希望这个工具承接的是“我想为某个人做点什么”的情绪。制作过程本身是表达，隐藏内容制造期待，而最后的揭晓和分享让这份创作真正抵达另一个人。
